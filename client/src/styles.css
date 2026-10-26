@@ -1,0 +1,64 @@
+/* Colours and shapes from the designs. CUSTOMIZE: change the variables to re-theme the whole app. */
+:root { --navy:#0d1b6b; --blue:#0079c1; --bright:#00a0e3; --teal:#00828c; --purple:#6b3fc4; --pink:#d02a7d; --pale:#eef3fb; --ink:#0d1b6b; }
+* { box-sizing: border-box; }
+body { margin:0; font-family:Nunito,Arial,sans-serif; color:var(--ink); background:#fff; }
+a { color:inherit; text-decoration:none; }
+h1,h2,h3,p { margin:0; }
+.wrap { max-width:1200px; margin:0 auto; padding:0 24px; }
+.center { text-align:center; padding:60px; }
+
+.hero-header { background:var(--navy); color:#fff; padding:18px 0 90px; border-radius:0 0 50% 50% / 0 0 70px 70px; }
+.bar-row { display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between; }
+.logo { background:var(--blue); color:#fff; border-radius:10px; padding:6px 16px; font-weight:900; font-size:26px; line-height:1.2; }
+nav { display:flex; gap:26px; flex-wrap:wrap; font-weight:800; font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
+nav a { padding:4px 0; border-bottom:3px solid transparent; }
+nav a.active { border-bottom-color:var(--bright); }
+.who { display:flex; gap:12px; align-items:center; font-weight:800; font-size:14px; }
+main { margin-top:-60px; padding-bottom:70px; }
+footer { background:var(--navy); color:#fff; padding:30px 0; }
+
+.pill { display:inline-block; border:2px solid var(--blue); border-radius:999px; padding:11px 22px; font:800 14px Nunito,Arial,sans-serif; background:transparent; color:var(--blue); cursor:pointer; }
+.pill.solid { background:var(--blue); color:#fff; }
+.pill.small { padding:6px 14px; font-size:13px; border-color:#fff; color:#fff; }
+.pill:disabled { opacity:.5; cursor:not-allowed; }
+:focus-visible { outline:3px solid var(--bright); outline-offset:2px; }
+
+.card { background:#fff; border-radius:20px; padding:22px; box-shadow:0 6px 24px rgba(13,27,107,.12); }
+.card h3 { font-size:17px; font-weight:900; margin-bottom:8px; }
+.tag { font-size:12px; font-weight:800; letter-spacing:.06em; text-transform:uppercase; margin-bottom:4px; }
+.grid { display:grid; gap:20px; grid-template-columns:repeat(auto-fit,minmax(260px,1fr)); }
+.grid.wide { grid-template-columns:repeat(auto-fit,minmax(380px,1fr)); }
+.stack > * + * { margin-top:20px; }
+.page-title { color:#fff; font-size:44px; font-weight:900; margin:8px 0 6px; }
+.page-sub { color:#fff; max-width:640px; line-height:1.6; margin-bottom:34px; }
+h2.section { font-size:28px; font-weight:900; margin:46px 0 16px; }
+.big { font-size:36px; font-weight:900; line-height:1.1; }
+.muted { font-size:13px; line-height:1.6; }
+
+.barwrap { margin:10px 0; }
+.barlabel { display:flex; justify-content:space-between; font-size:13px; font-weight:800; }
+.bar { height:10px; border-radius:999px; background:#d4e6f5; overflow:hidden; margin-top:4px; }
+.bar i { display:block; height:100%; background:var(--bright); }
+
+.row { display:flex; justify-content:space-between; gap:12px; padding:10px 0; border-top:2px solid var(--pale); font-size:14px; align-items:center; }
+.check { display:flex; gap:10px; align-items:flex-start; padding:10px 0; border-top:2px solid var(--pale); font-size:14px; }
+.check input { width:20px; height:20px; margin-top:2px; flex:none; }
+.check label { flex:1; line-height:1.5; }
+.check b { color:var(--blue); font-size:13px; }
+
+label.field { display:block; font-weight:800; font-size:12px; letter-spacing:.06em; margin:12px 0 4px; text-transform:uppercase; }
+input[type=text],input[type=email],input[type=password],input[type=number],select,textarea { width:100%; padding:12px; border:2px solid var(--navy); border-radius:12px; font:500 14px Nunito,Arial,sans-serif; color:var(--navy); background:#fff; }
+.flex { display:flex; flex-wrap:wrap; gap:14px; align-items:flex-end; }
+.flex > * { flex:1 1 150px; }
+.dropzone { border:3px dashed var(--bright); border-radius:18px; padding:22px; text-align:center; background:var(--pale); }
+.preview { max-width:100%; max-height:220px; border-radius:12px; margin-top:12px; }
+
+.error { color:#a02020; font-weight:800; margin:12px 0; }
+.note { background:var(--pale); border-radius:14px; padding:14px; font-size:14px; line-height:1.6; margin:12px 0; }
+.demo { background:#fff4d6; border-radius:14px; padding:10px 14px; font-weight:800; font-size:13px; margin-bottom:12px; }
+table { width:100%; border-collapse:collapse; font-size:13px; }
+th,td { text-align:left; padding:9px 8px; border-top:2px solid var(--pale); }
+.table-scroll { overflow-x:auto; }
+
+.login { max-width:440px; margin:60px auto; }
+.login h1 { font-size:34px; font-weight:900; margin-bottom:6px; }
