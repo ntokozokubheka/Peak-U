@@ -5,6 +5,12 @@ import Dashboard from './pages/Dashboard.jsx';
 import StudyLab from './pages/StudyLab.jsx';
 import Season from './pages/Season.jsx';
 import Captains from './pages/Captains.jsx';
+import Home from './pages/Home.jsx';
+
+// Import your assets
+import heroGraphic from './assets/Serve Toward Brighter Futures.png';
+import captainImg from './assets/With_Peako.jpg';
+import deptGraphic from './assets/zungu.jpg';
 
 // CUSTOMIZE: add a page by creating src/pages/YourPage.jsx, then add one line here and one in <Routes>.
 const NAV = [
@@ -27,7 +33,7 @@ function Layout({ children }) {
             ))}
           </nav>
           <div className="who">
-            <span>{user.name}</span>
+            <span>{user?.name}</span>
             <button className="pill small" onClick={signOut}>Log out</button>
           </div>
         </div>
@@ -46,7 +52,26 @@ function Layout({ children }) {
 export default function App() {
   const { user, loading } = useAuth();
   if (loading) return <p className="center">Loading...</p>;
-  if (!user) return <Routes><Route path="*" element={<Login />} /></Routes>;
+  
+  if (!user) {
+    return (
+      <Routes>
+        <Route 
+          path="/" 
+          element={
+            <Home 
+              heroGraphicUrl={heroGraphic}
+              captainImageUrl={captainImg}
+              deptGraphicUrl={deptGraphic}
+            />
+          } 
+        />
+        <Route path="/login" element={<Login />} />
+        <Route path="*" element={<Navigate to="/" />} />
+      </Routes>
+    );
+  }
+
   return (
     <Layout>
       <Routes>
