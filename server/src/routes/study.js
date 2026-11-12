@@ -1,4 +1,4 @@
-// Study Lab: scan a problem, similar problem, practice paper. All go through the Coach AI.
+// Study Lab: scan a problem, similar problem, practice paper. All go through the OpenAI Coach AI.
 import { Router } from 'express';
 import { query } from '../db.js';
 import { wrap } from '../util/wrap.js';

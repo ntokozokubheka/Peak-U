@@ -10,9 +10,6 @@ h1,h2,h3,p { margin:0; }
 .hero-header { background:var(--navy); color:#fff; padding:18px 0 90px; border-radius:0 0 50% 50% / 0 0 70px 70px; }
 .bar-row { display:flex; flex-wrap:wrap; gap:18px; align-items:center; justify-content:space-between; }
 .logo { background:var(--blue); color:#fff; border-radius:10px; padding:6px 16px; font-weight:900; font-size:26px; line-height:1.2; }
-nav { display:flex; gap:26px; flex-wrap:wrap; font-weight:800; font-size:13px; letter-spacing:.08em; text-transform:uppercase; }
-nav a { padding:4px 0; border-bottom:3px solid transparent; }
-nav a.active { border-bottom-color:var(--bright); }
 .who { display:flex; gap:12px; align-items:center; font-weight:800; font-size:14px; }
 main { margin-top:-60px; padding-bottom:70px; }
 footer { background:var(--navy); color:#fff; padding:30px 0; }
@@ -60,5 +57,239 @@ table { width:100%; border-collapse:collapse; font-size:13px; }
 th,td { text-align:left; padding:9px 8px; border-top:2px solid var(--pale); }
 .table-scroll { overflow-x:auto; }
 
-.login { max-width:440px; margin:60px auto; }
-.login h1 { font-size:34px; font-weight:900; margin-bottom:6px; }
+/* Keep logo, nav links, and user profile on one horizontal line */
+.hero-header .wrap {
+  max-width: 1440px; /* Widens container slightly so all 12 links have breathing room */
+}
+
+
+.logo {
+  background: var(--blue);
+  color: #fff;
+  border-radius: 10px;
+  padding: 6px 14px;
+  font-weight: 900;
+  font-size: 22px;
+  line-height: 1.2;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+nav {
+  display: flex;
+  flex-wrap: nowrap;
+  gap: 14px;
+  align-items: center;
+  font-weight: 800;
+  font-size: 11px;
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  overflow-x: auto; /* Allows clean horizontal scrolling on smaller laptops without wrapping */
+  scrollbar-width: none; /* Hides scrollbar in Firefox */
+}
+
+nav::-webkit-scrollbar {
+  display: none; /* Hides scrollbar in Chrome/Safari */
+}
+
+nav a {
+  padding: 4px 0;
+  border-bottom: 3px solid transparent;
+  white-space: nowrap; /* Prevents multi-word links like "STUDY LAB" or "BODY & MONEY" from breaking */
+}
+
+nav a.active {
+  border-bottom-color: var(--bright);
+}
+
+.who {
+  display: flex;
+  gap: 10px;
+  align-items: center;
+  font-weight: 800;
+  font-size: 13px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* Replace the old .login rules at the bottom of styles.css with this: */
+.auth-split {
+  display: flex;
+  min-height: 100vh;
+  background: #fff;
+}
+
+.auth-banner {
+  flex: 0 0 45%;
+  background: var(--navy);
+  color: #fff;
+  border-radius: 0 80px 80px 0;
+  padding: 48px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+}
+
+/* Decorative background shapes in the navy panel */
+.auth-banner::before {
+  content: '';
+  position: absolute;
+  bottom: 95px;
+  left: 28px;
+  width: 115px;
+  height: 115px;
+  border-radius: 50%;
+  background: rgba(126, 206, 253, 0.85);
+  z-index: 1;
+}
+
+.auth-banner::after {
+  content: '';
+  position: absolute;
+  bottom: -60px;
+  right: -20px;
+  width: 310px;
+  height: 310px;
+  border-radius: 50%;
+  background: #082347;
+  z-index: 1;
+}
+
+.auth-banner-content {
+  position: relative;
+  z-index: 2;
+  max-width: 380px;
+}
+
+.auth-banner h2 {
+  font-size: 40px;
+  font-weight: 900;
+  line-height: 1.05;
+  text-transform: uppercase;
+  margin-bottom: 14px;
+}
+
+.auth-banner p {
+  font-size: 14px;
+  line-height: 1.6;
+  opacity: 0.92;
+}
+
+.auth-form-side {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 40px 24px;
+}
+
+.auth-box {
+  width: 100%;
+  max-width: 460px;
+}
+
+.auth-box h1 {
+  font-size: 36px;
+  font-weight: 900;
+  text-transform: uppercase;
+  margin-bottom: 6px;
+}
+
+.auth-row-2 {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 14px;
+}
+
+.auth-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-top: 14px;
+  font-size: 13px;
+  font-weight: 700;
+}
+
+.auth-check {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 13px;
+  font-weight: 700;
+  margin-top: 14px;
+  cursor: pointer;
+}
+
+.auth-check input {
+  width: 16px;
+  height: 16px;
+  accent-color: var(--navy);
+}
+
+.pill.full {
+  width: 100%;
+  text-align: center;
+  text-transform: uppercase;
+  letter-spacing: 0.04em;
+  padding: 14px 22px;
+}
+
+.link-btn {
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--blue);
+  font: 800 13px Nunito, Arial, sans-serif;
+  cursor: pointer;
+}
+
+.link-btn:hover {
+  text-decoration: underline;
+}
+
+/* Responsive collapse for mobile/tablet */
+@media (max-width: 900px) {
+  .auth-split { flex-direction: column; }
+  .auth-banner { border-radius: 0 0 40px 40px; padding: 32px 24px; min-height: 260px; }
+  .auth-row-2 { grid-template-columns: 1fr; gap: 0; }
+}
+
+
+
+/* Study Lab heading inside navigation area */
+
+.study-nav-heading {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 24px;
+  padding: 25px 0 0;
+}
+
+.study-nav-heading .page-title {
+  font-size: 36px;
+  margin: 0 0 8px;
+}
+
+.study-nav-heading .page-sub {
+  font-size: 14px;
+  margin: 0;
+  max-width: 650px;
+}
+
+.study-nav-heading .error {
+  flex: 0 1 350px;
+}
+
+@media (max-width: 768px) {
+  .study-nav-heading {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .study-nav-heading .page-title {
+    font-size: 30px;
+  }
+}
