@@ -9,32 +9,51 @@ const dir = path.dirname(fileURLToPath(import.meta.url));
 const COACH_PROMPT = fs.readFileSync(path.join(dir, '../../prompts/coach.md'), 'utf8');
 export const hasKey = () => Boolean(process.env.GEMINI_API_KEY);
 
-async function callGemini({ contents, maxTokens = 1400 }) {
+async function callGemini({ contents, maxTokens = 1400 }, retries = 3, delay = 1000) {
   const apiKey = process.env.GEMINI_API_KEY;
   const model = process.env.GEMINI_MODEL || 'gemini-3.8-flash'; 
   const url = `https://generativelanguage.googleapis.com/v1beta/models/${model}:generateContent?key=${apiKey}`;
 
-  const res = await fetch(url, {
-    method: 'POST',
-    headers: { 'content-type': 'application/json' },
-    body: JSON.stringify({
-      systemInstruction: {
-        parts: [{ text: COACH_PROMPT + '\n\nYou are being called by an app. Reply with ONLY one valid JSON object, no markdown code blocks.' }]
-      },
-      contents: contents,
-      generationConfig: {
-        maxOutputTokens: maxTokens,
-        responseMimeType: 'application/json'
-      }
-    }),
-  });
+  try {
+    const res = await fetch(url, {
+      method: 'POST',
+      headers: { 'content-type': 'application/json' },
+      body: JSON.stringify({
+        systemInstruction: {
+          parts: [{ text: COACH_PROMPT + '\n\nYou are being called by an app. Reply with ONLY one valid JSON object, no markdown code blocks.' }]
+        },
+        contents: contents,
+        generationConfig: {
+          maxOutputTokens: maxTokens,
+          responseMimeType: 'application/json'
+        }
+      }),
+    });
 
-  if (!res.ok) throw new Error(`Gemini API ${res.status}: ${await res.text()}`);
-  const data = await res.json();
-  const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
-  if (!text) throw new Error('Empty response received from Gemini API');
-  
-  return JSON.parse(text);
+    if (!res.ok) {
+      const errorBody = await res.text();
+      // If we hit a 503 (Service Unavailable) or 429 (Rate Limit) and have retries left
+      if ((res.status === 503 || res.status === 429) && retries > 0) {
+        console.warn(`[server] Gemini API ${res.status}. Retrying in ${delay}ms... (${retries} attempts left)`);
+        await new Promise(resolve => setTimeout(resolve, delay));
+        return callGemini({ contents, maxTokens }, retries - 1, delay * 2);
+      }
+      throw new Error(`Gemini API ${res.status}: ${errorBody}`);
+    }
+
+    const data = await res.json();
+    const text = data.candidates?.[0]?.content?.parts?.[0]?.text;
+    if (!text) throw new Error('Empty response received from Gemini API');
+    
+    return JSON.parse(text);
+  } catch (error) {
+    if (retries > 0 && (error.message.includes('503') || error.message.includes('UNAVAILABLE') || error.message.includes('429'))) {
+      console.warn(`[server] Network/API unavailable or rate limited. Retrying in ${delay}ms...`);
+      await new Promise(resolve => setTimeout(resolve, delay));
+      return callGemini({ contents, maxTokens }, retries - 1, delay * 2);
+    }
+    throw error;
+  }
 }
 
 export async function breakdownProblem({ imageBase64, mediaType, text, taskType, helpMode, attempt }) {

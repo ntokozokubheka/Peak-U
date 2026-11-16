@@ -12,11 +12,11 @@ You need Node 18+ and a Postgres database (Docker is the easiest).
 
 ```bash
 docker compose up -d                 # starts Postgres (or use any Postgres)
-cp server/.env.example server/.env   # then edit if needed
+cp 
+```server/.env.example server/.env   # then edit if needed
 npm run install:all
 npm run db:setup                     # creates tables + demo data
 npm run dev                          # server :4000, React :5173
-```
 
 Open http://localhost:5173 and log in with **demo@peaku.test / demo1234**.
 

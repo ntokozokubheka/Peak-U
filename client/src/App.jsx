@@ -6,6 +6,14 @@ import StudyLab from './pages/StudyLab.jsx';
 import Season from './pages/Season.jsx';
 import Captains from './pages/Captains.jsx';
 import Home from './pages/Home.jsx';
+import Rewards from './pages/Rewards.jsx'
+import Goals from './pages/Goals.jsx'
+import Calendar from './pages/Calendar.jsx'
+import BodyMind from './pages/BodyMind.jsx'
+import QuickSetup from './pages/QuickSetup.jsx';
+import Community from './pages/Community.jsx';
+import DepartmentPortal from './pages/DepartmentPortal.jsx';
+import StartPack from './pages/StartPack.jsx';
 
 // Import your assets
 import heroGraphic from './assets/Serve Toward Brighter Futures.png';
@@ -26,6 +34,7 @@ const NAV = [
   ['/goals', 'Goals'],
   ['/body-money', 'Body & Money'],
   ['/rewards', 'Rewards'],
+  ['/department-portal','Department Portal']
 ];
 
 // Simple placeholder view for pages not built yet
@@ -110,17 +119,19 @@ export default function App() {
         <Route path="/study" element={<StudyLab />} />
         <Route path="/season" element={<Season />} />
         <Route path="/captains" element={<Captains />} />
+        <Route path="/rewards" element={<Rewards />} />
+        <Route path="/rewards" element={<Rewards />} />
+        <Route path="/goals" element={< Goals />} />
+        <Route path="/calendar" element={< Calendar />} />
+        <Route path="/body-money" element={< BodyMind  />} />
+         <Route path="/community" element={<Community />} />
+         <Route path="/quick-setup" element={<QuickSetup/>} />
+         <Route path="/department-portal" element={<DepartmentPortal/>} />
+           <Route path="/start-pack" element={<StartPack />} />
 
         {/* 2. ADD MATCHING PLACEHOLDER ROUTES HERE */}
         <Route path="/pathways" element={<PlaceholderPage title="Pathways" />} />
-        <Route path="/start-pack" element={<PlaceholderPage title="Start Pack" />} />
-        <Route path="/community" element={<PlaceholderPage title="Community" />} />
-        <Route path="/quick-setup" element={<PlaceholderPage title="Quick Setup" />} />
-        <Route path="/calendar" element={<PlaceholderPage title="Calendar" />} />
-        <Route path="/goals" element={<PlaceholderPage title="Goals" />} />
-        <Route path="/body-money" element={<PlaceholderPage title="Body & Money" />} />
-        <Route path="/rewards" element={<PlaceholderPage title="Rewards" />} />
-
+      
         <Route path="*" element={<Navigate to="/" />} />
       </Routes>
     </Layout>
